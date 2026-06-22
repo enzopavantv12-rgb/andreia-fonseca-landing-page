@@ -5889,6 +5889,13 @@ tailwind.config = {
         7: "Programa de Reconexão com o Prazer",
       };
 
+      // Mapeamento de experiência (id → label legível para resumo)
+      const FUNIL_EXPERIENCIA_LABEL = {
+        nunca: "Nunca tive contato",
+        pouca: "Tive pouca experiência",
+        experiente: "Tenho experiência",
+      };
+
       const FUNIL_MENSAGENS = {
         1: (nome, exp) =>
           `Olá Andreia! Sou ${nome}.
@@ -6180,7 +6187,7 @@ Gostaria de saber mais sobre o formato das sessões, valores e agendamento. 🌹
         const mensagem = mensagemFn(nomeCapitalizado, funilEstado.experiencia);
 
         const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
-        window.open(url, "_blank");
+        window.location.href = url;
 
         fecharFunil();
       }
@@ -6189,7 +6196,7 @@ Gostaria de saber mais sobre o formato das sessões, valores e agendamento. 🌹
 
       function funilPular() {
         const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(FUNIL_MENSAGEM_GENERICA)}`;
-        window.open(url, "_blank");
+        window.location.href = url;
         fecharFunil();
       }
 
