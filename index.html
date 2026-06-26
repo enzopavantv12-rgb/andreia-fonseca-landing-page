@@ -861,419 +861,6 @@
         font-style: italic;
       }
 
-      /* === FUNIL DE QUALIFICAÇÃO — 3 ETAPAS === */
-
-      .funil-overlay {
-        position: fixed;
-        inset: 0;
-        background: rgba(31, 15, 26, 0.85);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        z-index: 9999;
-        display: none;
-        align-items: center;
-        justify-content: center;
-        padding: 16px;
-        opacity: 0;
-        transition: opacity 400ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .funil-overlay.is-open {
-        display: flex;
-        opacity: 1;
-      }
-
-      .funil-container {
-        position: relative;
-        width: 100%;
-        max-width: 560px;
-        max-height: 92vh;
-        background: linear-gradient(180deg, #2a1820 0%, #1f0f1a 100%);
-        border: 1px solid rgba(212, 184, 150, 0.25);
-        border-radius: 20px;
-        padding: 32px 24px 28px;
-        box-shadow: 0 32px 80px rgba(31, 15, 26, 0.6);
-        overflow-y: auto;
-        transform: translateY(20px) scale(0.96);
-        opacity: 0;
-        transition:
-          transform 500ms cubic-bezier(0.4, 0, 0.2, 1),
-          opacity 400ms ease-out,
-          max-width 450ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      @media (min-width: 640px) {
-        .funil-container {
-          padding: 40px 40px 32px;
-        }
-      }
-
-      .funil-overlay.is-open .funil-container {
-        transform: translateY(0) scale(1);
-        opacity: 1;
-      }
-
-      /* Botão fechar (X) */
-      .funil-close {
-        position: absolute;
-        top: 16px;
-        right: 16px;
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: rgba(242, 229, 218, 0.08);
-        border: 1px solid rgba(242, 229, 218, 0.18);
-        color: #f2e5da;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        transition: all 300ms ease;
-        z-index: 5;
-      }
-
-      .funil-close:hover {
-        background: rgba(184, 69, 110, 0.25);
-        border-color: rgba(184, 69, 110, 0.5);
-        transform: rotate(90deg);
-      }
-
-      /* Header com progresso */
-      .funil-header {
-        margin-bottom: 28px;
-      }
-
-      .funil-progress-row {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 18px;
-      }
-
-      .funil-progress-bar {
-        flex: 1;
-        height: 4px;
-        background: rgba(242, 229, 218, 0.12);
-        border-radius: 999px;
-        overflow: hidden;
-      }
-
-      .funil-progress-fill {
-        height: 100%;
-        background: linear-gradient(90deg, #b8456e 0%, #d4b896 100%);
-        border-radius: 999px;
-        width: 33.33%;
-        transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .funil-progress-text {
-        font-family: "Inter", sans-serif;
-        font-size: 0.75rem;
-        color: rgba(242, 229, 218, 0.78);
-        font-weight: 500;
-        letter-spacing: 0.04em;
-        white-space: nowrap;
-      }
-
-      .funil-step-eyebrow {
-        font-family: "Inter", sans-serif;
-        font-size: 0.7rem;
-        font-weight: 600;
-        letter-spacing: 0.22em;
-        text-transform: uppercase;
-        color: #d4b896;
-        display: block;
-        margin-bottom: 8px;
-      }
-
-      .funil-step-titulo {
-        font-family: "Cormorant Garamond", serif;
-        font-size: 1.625rem;
-        line-height: 1.2;
-        font-weight: 600;
-        color: #f2e5da;
-        margin: 0 0 6px 0;
-      }
-
-      @media (min-width: 640px) {
-        .funil-step-titulo {
-          font-size: 2rem;
-        }
-      }
-
-      .funil-step-subtitulo {
-        font-family: "Inter", sans-serif;
-        font-size: 0.9rem;
-        line-height: 1.55;
-        color: rgba(242, 229, 218, 0.85);
-        margin: 0;
-      }
-
-      /* Etapas (cada uma é um wrapper que aparece/some) */
-      .funil-step {
-        display: none;
-        animation: funilFadeIn 400ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .funil-step.is-active {
-        display: block;
-      }
-
-      @keyframes funilFadeIn {
-        from {
-          opacity: 0;
-          transform: translateX(12px);
-        }
-        to {
-          opacity: 1;
-          transform: translateX(0);
-        }
-      }
-
-      /* Opções (cards clicáveis) */
-      .funil-options {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        margin-bottom: 24px;
-      }
-
-      .funil-option {
-        display: flex;
-        align-items: center;
-        gap: 14px;
-        width: 100%;
-        padding: 16px 18px;
-        background: rgba(242, 229, 218, 0.04);
-        border: 1px solid rgba(242, 229, 218, 0.15);
-        border-radius: 12px;
-        color: #f2e5da;
-        font-family: "Inter", sans-serif;
-        font-size: 0.95rem;
-        text-align: left;
-        cursor: pointer;
-        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .funil-option:hover {
-        background: rgba(184, 69, 110, 0.12);
-        border-color: rgba(184, 69, 110, 0.45);
-        transform: scale(1.02) translateY(-2px);
-        box-shadow: 0 6px 15px rgba(31, 15, 26, 0.3);
-      }
-
-      .funil-option.is-selected {
-        background: rgba(184, 69, 110, 0.18);
-        border-color: #b8456e;
-        box-shadow: 0 0 0 3px rgba(184, 69, 110, 0.15);
-        transform: scale(1.02);
-      }
-
-      .funil-option-numero {
-        font-family: "Cormorant Garamond", serif;
-        font-style: italic;
-        font-size: 1.125rem;
-        color: rgba(212, 184, 150, 0.85);
-        min-width: 28px;
-      }
-
-      .funil-option-texto {
-        flex: 1;
-        font-weight: 500;
-      }
-
-      .funil-option-sub {
-        display: block;
-        font-size: 0.78rem;
-        color: rgba(242, 229, 218, 0.72);
-        font-weight: 400;
-        margin-top: 2px;
-      }
-
-      .funil-option-check {
-        width: 22px;
-        height: 22px;
-        border-radius: 50%;
-        border: 1.5px solid rgba(242, 229, 218, 0.25);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        transition: all 300ms ease;
-      }
-
-      .funil-option.is-selected .funil-option-check {
-        background: #b8456e;
-        border-color: #b8456e;
-      }
-
-      .funil-option-check svg {
-        width: 12px;
-        height: 12px;
-        color: #f2e5da;
-        opacity: 0;
-        transition: opacity 200ms ease;
-      }
-
-      .funil-option.is-selected .funil-option-check svg {
-        opacity: 1;
-      }
-
-      /* Input de nome (etapa 3) */
-      .funil-input-wrapper {
-        margin-bottom: 24px;
-      }
-
-      .funil-input {
-        width: 100%;
-        padding: 16px 18px;
-        background: rgba(242, 229, 218, 0.04);
-        border: 1px solid rgba(242, 229, 218, 0.15);
-        border-radius: 12px;
-        color: #f2e5da;
-        font-family: "Inter", sans-serif;
-        font-size: 1rem;
-        transition: all 300ms ease;
-      }
-
-      .funil-input::placeholder {
-        color: rgba(242, 229, 218, 0.4);
-      }
-
-      .funil-input:focus {
-        outline: none;
-        background: rgba(184, 69, 110, 0.08);
-        border-color: #b8456e;
-        box-shadow: 0 0 0 3px rgba(184, 69, 110, 0.18);
-      }
-
-      /* Resumo (etapa 3) */
-      .funil-resumo {
-        margin-bottom: 20px;
-        padding: 16px;
-        background: rgba(212, 184, 150, 0.06);
-        border: 1px solid rgba(212, 184, 150, 0.18);
-        border-radius: 12px;
-      }
-
-      .funil-resumo-item {
-        font-family: "Inter", sans-serif;
-        font-size: 0.85rem;
-        color: rgba(242, 229, 218, 0.85);
-        display: flex;
-        justify-content: space-between;
-        gap: 10px;
-        padding: 4px 0;
-      }
-
-      .funil-resumo-item:not(:last-child) {
-        border-bottom: 1px solid rgba(212, 184, 150, 0.12);
-        padding-bottom: 8px;
-        margin-bottom: 4px;
-      }
-
-      .funil-resumo-label {
-        color: rgba(242, 229, 218, 0.55);
-        font-weight: 500;
-      }
-
-      .funil-resumo-valor {
-        color: #f2e5da;
-        font-weight: 500;
-        text-align: right;
-      }
-
-      /* Footer com botões navegação */
-      .funil-footer {
-        display: flex;
-        flex-direction: column-reverse;
-        gap: 10px;
-      }
-
-      @media (min-width: 480px) {
-        .funil-footer {
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: center;
-        }
-      }
-
-      .funil-btn-voltar {
-        display: inline-flex;
-        align-items: center;
-        gap: 6px;
-        padding: 12px 18px;
-        background: transparent;
-        border: none;
-        color: rgba(242, 229, 218, 0.65);
-        font-family: "Inter", sans-serif;
-        font-size: 0.85rem;
-        font-weight: 500;
-        cursor: pointer;
-        transition: color 300ms ease;
-      }
-
-      .funil-btn-voltar:hover {
-        color: #f2e5da;
-      }
-
-      .funil-btn-voltar:disabled {
-        opacity: 0.3;
-        cursor: not-allowed;
-      }
-
-      .funil-btn-avancar {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 14px 28px;
-        background: #b8456e;
-        border: 1px solid #b8456e;
-        color: #f2e5da;
-        font-family: "Inter", sans-serif;
-        font-size: 0.8rem;
-        font-weight: 600;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        border-radius: 999px;
-        cursor: pointer;
-        transition: all 350ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .funil-btn-avancar:hover:not(:disabled) {
-        background: #9a3458;
-        border-color: #9a3458;
-        letter-spacing: 0.22em;
-      }
-
-      .funil-btn-avancar:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-      }
-
-      /* Link "Pular para WhatsApp" no rodapé */
-      .funil-pular {
-        margin-top: 18px;
-        text-align: center;
-      }
-
-      .funil-pular-link {
-        font-family: "Inter", sans-serif;
-        font-size: 0.78rem;
-        color: rgba(242, 229, 218, 0.45);
-        text-decoration: underline;
-        text-underline-offset: 3px;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        transition: color 300ms ease;
-      }
-
-      .funil-pular-link:hover {
-        color: #d4b896;
-      }
-
       /* === HEADER REALOCADO DA SEÇÃO "COMO FUNCIONA" === */
 
       .como-funciona-header-inline {
@@ -1744,159 +1331,6 @@
         }
       }
 
-      /* === ETAPA 1 DO FUNIL — GRID 3×2 COMPACTO === */
-
-      /* Container expande quando está na etapa 1 (mais espaço pro grid horizontal) */
-      .funil-container.is-step-1 {
-        max-width: 820px;
-      }
-
-      /* Grid de serviços na etapa 1 */
-      .funil-options-grid {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-        margin-top: 22px;
-        margin-bottom: 24px;
-      }
-
-      @media (min-width: 560px) {
-        .funil-options-grid {
-          grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
-        }
-      }
-
-      @media (min-width: 820px) {
-        .funil-options-grid {
-          grid-template-columns: repeat(3, 1fr);
-          gap: 14px;
-        }
-      }
-
-      /* Centraliza o 7º serviço na última linha do grid em desktop e tablet */
-      @media (min-width: 820px) {
-        .funil-options-grid > .funil-option:nth-child(7):last-child {
-          grid-column: 2;
-        }
-      }
-
-      @media (min-width: 640px) and (max-width: 819px) {
-        .funil-options-grid > .funil-option:nth-child(7):last-child {
-          grid-column: 1 / span 2;
-          justify-self: center;
-          width: 100%;
-          max-width: calc(50% - 6px);
-        }
-      }
-
-      /* Card de opção em formato compacto (para o grid) */
-      .funil-option-compact {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 8px;
-        width: 100%;
-        min-height: 110px;
-        padding: 16px 14px 14px;
-        background: rgba(242, 229, 218, 0.04);
-        border: 1px solid rgba(242, 229, 218, 0.15);
-        border-radius: 12px;
-        color: #f2e5da;
-        font-family: "Inter", sans-serif;
-        text-align: left;
-        cursor: pointer;
-        position: relative;
-        transition: all 300ms cubic-bezier(0.4, 0, 0.2, 1);
-      }
-
-      .funil-option-compact:hover {
-        background: rgba(184, 69, 110, 0.12);
-        border-color: rgba(184, 69, 110, 0.45);
-        transform: scale(1.03) translateY(-2px);
-        box-shadow: 0 8px 20px rgba(31, 15, 26, 0.3);
-      }
-
-      .funil-option-compact.is-selected {
-        background: rgba(184, 69, 110, 0.18);
-        border-color: #b8456e;
-        box-shadow: 0 0 0 3px rgba(184, 69, 110, 0.15);
-        transform: scale(1.03);
-      }
-
-      /* Header do card compacto: número + check */
-      .funil-option-compact-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-      }
-
-      .funil-option-compact .funil-option-numero {
-        font-family: "Cormorant Garamond", serif;
-        font-style: italic;
-        font-size: 1.5rem;
-        color: rgba(212, 184, 150, 0.85);
-        min-width: auto;
-        line-height: 1;
-      }
-
-      .funil-option-compact.is-selected .funil-option-numero {
-        color: #d4b896;
-      }
-
-      .funil-option-compact .funil-option-check {
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        border: 1.5px solid rgba(242, 229, 218, 0.25);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        transition: all 300ms ease;
-      }
-
-      .funil-option-compact.is-selected .funil-option-check {
-        background: #b8456e;
-        border-color: #b8456e;
-      }
-
-      .funil-option-compact .funil-option-check svg {
-        width: 11px;
-        height: 11px;
-        color: #f2e5da;
-        opacity: 0;
-        transition: opacity 200ms ease;
-      }
-
-      .funil-option-compact.is-selected .funil-option-check svg {
-        opacity: 1;
-      }
-
-      /* Conteúdo do card compacto: título + subtítulo */
-      .funil-option-compact-titulo {
-        font-size: 0.875rem;
-        line-height: 1.3;
-        font-weight: 600;
-        color: #f2e5da;
-        margin: 0;
-      }
-
-      .funil-option-compact-sub {
-        font-size: 0.72rem;
-        line-height: 1.4;
-        color: rgba(242, 229, 218, 0.72);
-        font-weight: 400;
-        margin: 0;
-      }
-      .funil-option-compact-text-wrapper {
-        display: flex;
-        flex-direction: column;
-        gap: 4px;
-        width: 100%;
-      }
-
       /* === OTIMIZAÇÕES MOBILE — SEÇÃO "COMO FUNCIONA" === */
 
       @media (max-width: 640px) {
@@ -2075,128 +1509,6 @@
 
         .carousel-progress-item.active .carousel-progress-track::after {
           color: #f2e5da;
-        }
-      }
-
-      /* === OTIMIZAÇÕES MOBILE — FUNIL ETAPA 1 === */
-
-      @media (max-width: 559px) {
-        /* Reduzir paddings do modal pra ganhar espaço */
-        .funil-container {
-          padding: 24px 18px 20px;
-          border-radius: 16px;
-          max-height: 94vh;
-        }
-
-        .funil-container.is-step-1 {
-          max-width: 100%;
-        }
-
-        /* Header do funil mais compacto */
-        .funil-header {
-          margin-bottom: 18px;
-        }
-
-        .funil-progress-row {
-          margin-bottom: 14px;
-        }
-
-        .funil-step-eyebrow {
-          font-size: 0.65rem;
-          letter-spacing: 0.2em;
-          margin-bottom: 6px;
-        }
-
-        .funil-step-titulo {
-          font-size: 1.375rem !important;
-          line-height: 1.15;
-          margin-bottom: 4px;
-        }
-
-        .funil-step-subtitulo {
-          font-size: 0.82rem;
-          line-height: 1.45;
-        }
-
-        /* Grid vira coluna única em mobile, mas com cards em layout HORIZONTAL */
-        .funil-options-grid {
-          grid-template-columns: 1fr !important;
-          gap: 8px;
-          margin-top: 16px;
-          margin-bottom: 18px;
-        }
-
-        /* Card compacto em formato HORIZONTAL em mobile */
-        .funil-option-compact {
-          flex-direction: row;
-          align-items: center;
-          min-height: auto;
-          padding: 12px 14px;
-          gap: 12px;
-        }
-
-        /* Header do card (número + check) vira coluna lateral à esquerda */
-        .funil-option-compact .funil-option-compact-header {
-          flex-direction: column;
-          width: auto;
-          gap: 8px;
-          align-items: center;
-          flex-shrink: 0;
-        }
-
-        .funil-option-compact .funil-option-numero {
-          font-size: 1.25rem;
-        }
-
-        .funil-option-compact .funil-option-check {
-          width: 18px;
-          height: 18px;
-        }
-
-        /* Conteúdo (título + subtítulo) ocupa o resto do espaço, à direita */
-        .funil-option-compact .funil-option-compact-titulo {
-          font-size: 0.85rem;
-          line-height: 1.25;
-          flex: 1;
-        }
-
-        .funil-option-compact .funil-option-compact-sub {
-          font-size: 0.7rem;
-          line-height: 1.35;
-          margin-top: 2px;
-        }
-
-        /* Wrapper que agrupa título e subtítulo na coluna direita */
-        .funil-option-compact-text-wrapper {
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          gap: 1px;
-          min-width: 0;
-        }
-
-        /* Footer do funil mais compacto */
-        .funil-footer {
-          margin-top: 8px;
-        }
-
-        .funil-btn-avancar {
-          padding: 12px 22px;
-          font-size: 0.72rem;
-        }
-
-        .funil-btn-voltar {
-          padding: 10px 14px;
-          font-size: 0.78rem;
-        }
-
-        /* Pular para WhatsApp mais discreto */
-        .funil-pular {
-          margin-top: 12px;
-        }
-
-        .funil-pular-link {
-          font-size: 0.72rem;
         }
       }
 
@@ -2787,13 +2099,10 @@ tailwind.config = {
       </div>
 
       <a
-        href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20tirar%20d%C3%BAvidas."
+        href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
         target="_blank"
         rel="noopener"
-        onclick="
-          event.preventDefault();
-          abrirFunil();
-        "
+        
         class="hidden md:inline-flex items-center justify-center gap-2 bg-magenta text-marfim px-5 py-2.5 rounded-xl font-sans font-medium text-[13px] hover:bg-berinjela transition-colors hover:-translate-y-0.5 whatsapp-direto"
        lang="pt-BR">
         <img aria-hidden="true" height="16" width="16" decoding="async" loading="lazy" src="https://i.postimg.cc/vHxKTV0Z/whatsapp-(9).png" alt="" style="
@@ -2912,13 +2221,10 @@ tailwind.config = {
 
           <div data-animate style="animation-delay: 600ms" class="mt-8">
             <a
-              href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20tirar%20d%C3%BAvidas."
+              href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
               target="_blank"
               rel="noopener"
-              onclick="
-                event.preventDefault();
-                abrirFunil();
-              "
+              
               class="shiny-cta whatsapp-direto"
               aria-label="Agendar sessão"
              lang="pt-BR">
@@ -3089,7 +2395,7 @@ tailwind.config = {
                 <div class="service-card__reveal">
                   <p class="service-card__subtitle">Uma experiência intensa de reconexão com o seu prazer</p>
                   <p class="service-card__description">Uma sessão individual focada em despertar sensações, ampliar a sensibilidade e reconectar você com o seu corpo. Através de toques conscientes e conduzidos com respeito, você vivencia o prazer de forma mais presente e profunda.</p>
-                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20na%20Sess%C3%A3o%20T%C3%A2ntrica%20Individual." target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
+                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA" target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
                 </div>
               </div>
             </article>
@@ -3104,7 +2410,7 @@ tailwind.config = {
                 <div class="service-card__reveal">
                   <p class="service-card__subtitle">Redescubram o prazer de estarem juntos</p>
                   <p class="service-card__description">Uma experiência guiada para casais que desejam fortalecer a conexão, despertar o desejo e sair da rotina. Mais presença, cumplicidade e novas formas de sentir o outro.</p>
-                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20na%20Sess%C3%A3o%20T%C3%A2ntrica%20para%20Casais." target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
+                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA" target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
                 </div>
               </div>
             </article>
@@ -3119,7 +2425,7 @@ tailwind.config = {
                 <div class="service-card__reveal">
                   <p class="service-card__subtitle">Aprenda a despertar sensações através do toque</p>
                   <p class="service-card__description">Um mini curso prático para desenvolver sensibilidade, presença e condução no toque. Aprenda técnicas que ampliam o prazer e criam experiências marcantes a dois.</p>
-                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20na%20Imers%C3%A3o%20Sensorial%20do%20Toque." target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
+                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA" target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
                 </div>
               </div>
             </article>
@@ -3134,7 +2440,7 @@ tailwind.config = {
                 <div class="service-card__reveal">
                   <p class="service-card__subtitle">Aprenda do zero, com prática e acompanhamento</p>
                   <p class="service-card__description">Um curso individual e guiado para quem deseja aprender a técnica com profundidade e segurança. Uma experiência prática, privada e totalmente focada no seu desenvolvimento.</p>
-                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20na%20Forma%C3%A7%C3%A3o%20em%20Massagem%20T%C3%A2ntrica." target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
+                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA" target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
                 </div>
               </div>
             </article>
@@ -3149,7 +2455,7 @@ tailwind.config = {
                 <div class="service-card__reveal">
                   <p class="service-card__subtitle">Aprofunde sua vivência e expanda suas possibilidades</p>
                   <p class="service-card__description">Para quem já iniciou no tantra e deseja evoluir na prática, sensibilidade e condução. Uma experiência mais profunda, com novas possibilidades de conexão e percepção.</p>
-                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20Curso%20de%20Aplica%C3%A7%C3%A3o." target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
+                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA" target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
                 </div>
               </div>
             </article>
@@ -3164,7 +2470,7 @@ tailwind.config = {
                 <div class="service-card__reveal">
                   <p class="service-card__subtitle">Aprendam juntos a criar experiências inesquecíveis</p>
                   <p class="service-card__description">Um treinamento exclusivo para casais que desejam explorar novas formas de prazer e conexão. Vocês aprendem, na prática, como conduzir experiências mais intensas e conscientes a dois.</p>
-                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20Treinamento%20T%C3%A2ntrico%20para%20Casais." target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
+                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA" target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
                 </div>
               </div>
             </article>
@@ -3179,7 +2485,7 @@ tailwind.config = {
                 <div class="service-card__reveal">
                   <p class="service-card__subtitle">Um caminho guiado para conhecer e sentir seu corpo de verdade</p>
                   <p class="service-card__description">Um protocolo em 4 encontros progressivos para desenvolver consciência corporal, comunicação e sensibilidade. Você aprende a reconhecer seus limites, expressar desejos e viver o prazer com mais clareza e segurança.</p>
-                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20Programa%20de%20Reconex%C3%A3o%20com%20o%20Prazer." target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
+                  <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA" target="_blank" rel="noopener" onclick="event.stopPropagation();" class="service-card__cta whatsapp-direto">Conheça essa experiência</a>
                 </div>
               </div>
             </article>
@@ -3257,13 +2563,9 @@ tailwind.config = {
             <span class="modal-servico-nota"
               >Sessão individual · Ambiente privado</span
             >
-            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20na%20Sess%C3%A3o%20T%C3%A2ntrica%20Individual."
+            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
               class="modal-servico-cta whatsapp-direto"
-              onclick="
-                event.preventDefault();
-                closeModal('modal-servico-1');
-                setTimeout(() => abrirFunil('1'), 300);
-              "
+              onclick="closeModal('modal-servico-1');"
               style="
                 display: inline-flex;
                 align-items: center;
@@ -3347,13 +2649,9 @@ tailwind.config = {
             <span class="modal-servico-nota"
               >Sessão para casais · Ambiente privado</span
             >
-            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20na%20Sess%C3%A3o%20T%C3%A2ntrica%20para%20Casais."
+            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
               class="modal-servico-cta whatsapp-direto"
-              onclick="
-                event.preventDefault();
-                closeModal('modal-servico-2');
-                setTimeout(() => abrirFunil('2'), 300);
-              "
+              onclick="closeModal('modal-servico-2');"
               style="
                 display: inline-flex;
                 align-items: center;
@@ -3434,13 +2732,9 @@ tailwind.config = {
             <span class="modal-servico-nota"
               >Mini curso prático · Acompanhamento individual</span
             >
-            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20na%20Imers%C3%A3o%20Sensorial%20do%20Toque."
+            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
               class="modal-servico-cta whatsapp-direto"
-              onclick="
-                event.preventDefault();
-                closeModal('modal-servico-3');
-                setTimeout(() => abrirFunil('3'), 300);
-              "
+              onclick="closeModal('modal-servico-3');"
               style="
                 display: inline-flex;
                 align-items: center;
@@ -3523,13 +2817,9 @@ tailwind.config = {
             <span class="modal-servico-nota"
               >Formação individual · Ambiente privado</span
             >
-            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20na%20Forma%C3%A7%C3%A3o%20em%20Massagem%20T%C3%A2ntrica."
+            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
               class="modal-servico-cta whatsapp-direto"
-              onclick="
-                event.preventDefault();
-                closeModal('modal-servico-4');
-                setTimeout(() => abrirFunil('4'), 300);
-              "
+              onclick="closeModal('modal-servico-4');"
               style="
                 display: inline-flex;
                 align-items: center;
@@ -3640,13 +2930,9 @@ tailwind.config = {
             <span class="modal-servico-nota"
               >Formação avançada · Pré-requisito: nível inicial</span
             >
-            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20Curso%20de%20Aplica%C3%A7%C3%A3o%20do%20Repert%C3%B3rio%20Sexual."
+            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
               class="modal-servico-cta whatsapp-direto"
-              onclick="
-                event.preventDefault();
-                closeModal('modal-servico-5');
-                setTimeout(() => abrirFunil('5'), 300);
-              "
+              onclick="closeModal('modal-servico-5');"
               style="
                 display: inline-flex;
                 align-items: center;
@@ -3729,13 +3015,9 @@ tailwind.config = {
             <span class="modal-servico-nota"
               >Treinamento para casais · Ambiente privado</span
             >
-            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20Treinamento%20T%C3%A2ntrico%20para%20Casais."
+            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
               class="modal-servico-cta whatsapp-direto"
-              onclick="
-                event.preventDefault();
-                closeModal('modal-servico-6');
-                setTimeout(() => abrirFunil('6'), 300);
-              "
+              onclick="closeModal('modal-servico-6');"
               style="
                 display: inline-flex;
                 align-items: center;
@@ -3852,13 +3134,9 @@ tailwind.config = {
             <span class="modal-servico-nota"
               >Protocolo de 4 sessões · Evolução gradual</span
             >
-            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20tenho%20interesse%20no%20Programa%20de%20Reconex%C3%A3o%20com%20o%20Prazer."
+            <a href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
               class="modal-servico-cta whatsapp-direto"
-              onclick="
-                event.preventDefault();
-                closeModal('modal-servico-7');
-                setTimeout(() => abrirFunil('7'), 300);
-              "
+              onclick="closeModal('modal-servico-7');"
               style="
                 display: inline-flex;
                 align-items: center;
@@ -4774,13 +4052,10 @@ tailwind.config = {
               Posso responder por WhatsApp com tranquilidade, sem compromisso.
             </p>
             <a
-              href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20tirar%20d%C3%BAvidas."
+              href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
               target="_blank"
               rel="noopener"
-              onclick="
-                event.preventDefault();
-                abrirFunil();
-              "
+              
               class="inline-flex items-center justify-center gap-2 bg-transparent text-magenta border border-magenta px-6 py-3 rounded-xl font-sans font-medium text-[15px] hover:bg-magenta hover:text-marfim transition-all duration-300 whatsapp-direto"
              lang="pt-BR">
               <img aria-hidden="true" height="16" width="16" decoding="async" loading="lazy" src="https://i.postimg.cc/vHxKTV0Z/whatsapp-(9).png" alt="" style="width: 18px; height: 18px; flex-shrink: 0" lang="pt-BR" />
@@ -4817,13 +4092,10 @@ tailwind.config = {
           </p>
 
           <a
-            href="https://wa.me/5531982003004?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20tirar%20d%C3%BAvidas."
+            href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
             target="_blank"
             rel="noopener"
-            onclick="
-              event.preventDefault();
-              abrirFunil();
-            "
+            
             class="inline-flex items-center justify-center gap-2 bg-champagne text-onyx px-12 py-5 rounded-xl font-sans font-medium text-[16px] shadow-[0_16px_48px_rgba(31,15,26,0.3)] hover:bg-marfim hover:scale-[1.02] transition-all duration-300 mb-6 whatsapp-direto"
             data-animate
             style="animation-delay: 300ms"
@@ -4962,7 +4234,7 @@ tailwind.config = {
                   "
                 ></i>
                 <a
-                  href="https://wa.me/5531982003004"
+                  href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="footer-glow-link whatsapp-direto"
@@ -5050,7 +4322,7 @@ tailwind.config = {
 
             <!-- Mini CTA -->
             <a
-              href="https://wa.me/5531982003004?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20tirar%20d%C3%BAvidas."
+              href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
               target="_blank"
               rel="noopener noreferrer"
               class="inline-flex items-center justify-center gap-2 mt-5 px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 whatsapp-direto"
@@ -5098,7 +4370,7 @@ tailwind.config = {
     </footer>
 
     <a
-      href="https://wa.me/5531982003004?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20tirar%20d%C3%BAvidas."
+      href="https://wa.me/5531982003004?text=Ol%C3%A1%20Andreia%20Fonseca%2C%20vim%20pelo%20site%20e%20gostaria%20de%20falar%20com%20voc%C3%AA"
       id="whatsapp-float"
       target="_blank"
       rel="noopener noreferrer"
@@ -5113,456 +4385,7 @@ tailwind.config = {
       </div>
     </a>
 
-    <!-- ===== MODAL FUNIL DE QUALIFICAÇÃO ===== -->
-    <div
-      id="modal-funil-qualificacao"
-      class="funil-overlay"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="funil-titulo"
-    >
-      <div class="funil-container">
-        <button
-          type="button"
-          class="funil-close"
-          onclick="fecharFunil()"
-          aria-label="Fechar"
-         lang="pt-BR">
-          <i
-            aria-hidden="true"
-            data-lucide="x"
-            style="width: 18px; height: 18px"
-          ></i>
-        </button>
-
-        <!-- Header com progresso -->
-        <div class="funil-header">
-          <div class="funil-progress-row">
-            <div class="funil-progress-bar">
-              <div class="funil-progress-fill" id="funil-progress-fill"></div>
-            </div>
-            <span class="funil-progress-text" id="funil-progress-text"
-              >Etapa 1 de 3</span
-            >
-          </div>
-        </div>
-
-        <!-- ETAPA 1: Serviço de interesse -->
-        <div class="funil-step is-active" data-step="1">
-          <span class="funil-step-eyebrow">Vamos começar</span>
-          <h2 class="funil-step-titulo" id="funil-titulo">
-            Qual serviço te interessa?
-          </h2>
-          <p class="funil-step-subtitulo">
-            Escolha o que mais ressoa com você nesse momento.
-          </p>
-
-          <div class="funil-options-grid">
-            <button
-              type="button"
-              class="funil-option-compact funil-option"
-              data-servico="1"
-             lang="pt-BR">
-              <div class="funil-option-compact-header">
-                <span class="funil-option-numero">01</span>
-                <span class="funil-option-check">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="3"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="funil-option-compact-text-wrapper">
-                <p class="funil-option-compact-titulo">
-                  Sessão Tântrica Individual
-                </p>
-                <p class="funil-option-compact-sub">
-                  Reconexão com seu corpo e prazer
-                </p>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              class="funil-option-compact funil-option"
-              data-servico="2"
-             lang="pt-BR">
-              <div class="funil-option-compact-header">
-                <span class="funil-option-numero">02</span>
-                <span class="funil-option-check">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="3"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="funil-option-compact-text-wrapper">
-                <p class="funil-option-compact-titulo">
-                  Sessão Tântrica para Casais
-                </p>
-                <p class="funil-option-compact-sub">
-                  Conexão e intimidade a dois
-                </p>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              class="funil-option-compact funil-option"
-              data-servico="3"
-             lang="pt-BR">
-              <div class="funil-option-compact-header">
-                <span class="funil-option-numero">03</span>
-                <span class="funil-option-check">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="3"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="funil-option-compact-text-wrapper">
-                <p class="funil-option-compact-titulo">
-                  Imersão Sensorial do Toque
-                </p>
-                <p class="funil-option-compact-sub">Mini curso prático</p>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              class="funil-option-compact funil-option"
-              data-servico="4"
-             lang="pt-BR">
-              <div class="funil-option-compact-header">
-                <span class="funil-option-numero">04</span>
-                <span class="funil-option-check">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="3"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="funil-option-compact-text-wrapper">
-                <p class="funil-option-compact-titulo">
-                  Formação em Massagem Tântrica
-                </p>
-                <p class="funil-option-compact-sub">
-                  Nível inicial · do zero ao domínio
-                </p>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              class="funil-option-compact funil-option"
-              data-servico="5"
-             lang="pt-BR">
-              <div class="funil-option-compact-header">
-                <span class="funil-option-numero">05</span>
-                <span class="funil-option-check">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="3"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="funil-option-compact-text-wrapper">
-                <p class="funil-option-compact-titulo">Curso de Aplicação</p>
-                <p class="funil-option-compact-sub">
-                  Repertório sexual com intenção
-                </p>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              class="funil-option-compact funil-option"
-              data-servico="6"
-             lang="pt-BR">
-              <div class="funil-option-compact-header">
-                <span class="funil-option-numero">06</span>
-                <span class="funil-option-check">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="3"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="funil-option-compact-text-wrapper">
-                <p class="funil-option-compact-titulo">
-                  Treinamento Tântrico para Casais
-                </p>
-                <p class="funil-option-compact-sub">
-                  Aprender a dois, na prática
-                </p>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              class="funil-option-compact funil-option"
-              data-servico="7"
-             lang="pt-BR">
-              <div class="funil-option-compact-header">
-                <span class="funil-option-numero">07</span>
-                <span class="funil-option-check">
-                  <svg
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="3"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                </span>
-              </div>
-              <div class="funil-option-compact-text-wrapper">
-                <p class="funil-option-compact-titulo">
-                  Programa de Reconexão com o Prazer
-                </p>
-                <p class="funil-option-compact-sub">
-                  4 sessões de evolução guiada
-                </p>
-              </div>
-            </button>
-          </div>
-
-          <div class="funil-footer" style="display: none;">
-            <button type="button" class="funil-btn-voltar" disabled lang="pt-BR">
-              ← Voltar
-            </button>
-            <button
-              type="button"
-              class="funil-btn-avancar"
-              id="funil-avancar-1"
-              onclick="funilAvancar()"
-              disabled
-             lang="pt-BR">
-              Continuar
-            </button>
-          </div>
-        </div>
-
-        <!-- ETAPA 2: Experiência prévia -->
-        <div class="funil-step" data-step="2">
-          <span class="funil-step-eyebrow">Sobre você</span>
-          <h2 class="funil-step-titulo">
-            Você já teve alguma experiência com tantra?
-          </h2>
-          <p class="funil-step-subtitulo">
-            Não há resposta certa — é só pra entender melhor o seu momento.
-          </p>
-
-          <div class="funil-options" style="margin-top: 22px">
-            <button type="button" class="funil-option" data-experiencia="nunca" lang="pt-BR">
-              <span class="funil-option-texto"
-                >Nunca tive contato<span class="funil-option-sub"
-                  >Tudo isso é novo pra mim</span
-                ></span
-              >
-              <span class="funil-option-check"
-                ><svg
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="3"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M5 13l4 4L19 7"
-                  /></svg
-              ></span>
-            </button>
-
-            <button type="button" class="funil-option" data-experiencia="pouca" lang="pt-BR">
-              <span class="funil-option-texto"
-                >Tive pouca experiência<span class="funil-option-sub"
-                  >Já ouvi falar ou tive alguma vivência</span
-                ></span
-              >
-              <span class="funil-option-check"
-                ><svg
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="3"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M5 13l4 4L19 7"
-                  /></svg
-              ></span>
-            </button>
-
-            <button
-              type="button"
-              class="funil-option"
-              data-experiencia="experiente"
-             lang="pt-BR">
-              <span class="funil-option-texto"
-                >Tenho experiência<span class="funil-option-sub"
-                  >Já vivenciei e quero aprofundar</span
-                ></span
-              >
-              <span class="funil-option-check"
-                ><svg
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  stroke-width="3"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M5 13l4 4L19 7"
-                  /></svg
-              ></span>
-            </button>
-          </div>
-
-          <div class="funil-footer">
-            <button
-              type="button"
-              class="funil-btn-voltar"
-              onclick="funilVoltar()"
-             lang="pt-BR">
-              ← Voltar
-            </button>
-            <button
-              type="button"
-              class="funil-btn-avancar"
-              id="funil-avancar-2"
-              onclick="funilAvancar()"
-              disabled
-              style="display: none;"
-             lang="pt-BR">
-              Continuar
-            </button>
-          </div>
-        </div>
-
-        <!-- ETAPA 3: Nome -->
-        <div class="funil-step" data-step="3">
-          <span class="funil-step-eyebrow">Quase lá</span>
-          <h2 class="funil-step-titulo">
-            Como você gostaria de ser chamada(o)?
-          </h2>
-          <p class="funil-step-subtitulo">
-            Vou usar seu nome pra te apresentar à Andreia.
-          </p>
-
-          <div class="funil-input-wrapper" style="margin-top: 22px">
-            <label for="funil-nome" class="sr-only">Seu primeiro nome</label>
-            <input
-              type="text"
-              id="funil-nome"
-              class="funil-input"
-              placeholder="Seu primeiro nome"
-              maxlength="40"
-              autocomplete="given-name"
-             lang="pt-BR" />
-          </div>
-
-          <div class="funil-resumo">
-            <div class="funil-resumo-item">
-              <span class="funil-resumo-label">Serviço</span>
-              <span class="funil-resumo-valor" id="funil-resumo-servico"
-                >—</span
-              >
-            </div>
-            <div class="funil-resumo-item">
-              <span class="funil-resumo-label">Experiência</span>
-              <span class="funil-resumo-valor" id="funil-resumo-experiencia"
-                >—</span
-              >
-            </div>
-          </div>
-
-          <div class="funil-footer">
-            <button
-              type="button"
-              class="funil-btn-voltar"
-              onclick="funilVoltar()"
-             lang="pt-BR">
-              ← Voltar
-            </button>
-            <button
-              type="button"
-              class="funil-btn-avancar"
-              id="funil-avancar-3"
-              onclick="funilFinalizar()"
-              disabled
-             lang="pt-BR">
-              Falar comigo
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-                <path d="M12.012 2c-5.506 0-9.988 4.482-9.988 9.988 0 1.76.459 3.475 1.33 4.988L2 22l5.188-1.36c1.465.8 3.106 1.22 4.814 1.22 5.507 0 9.999-4.483 9.999-9.988C22 6.482 17.518 2 12.012 2zm6.368 14.18c-.28.784-1.608 1.488-2.22 1.54-.564.048-1.28.08-3.668-.908-3.048-1.268-5.008-4.364-5.16-4.564-.152-.2-1.22-1.624-1.22-3.1s.776-2.192 1.056-2.496c.28-.304.608-.384.816-.384.208 0 .416.008.6.016.192.008.448-.08.704.544.28.68.96 2.336 1.04 2.504.08.168.136.368.024.6-.112.232-.248.376-.392.544-.144.168-.304.376-.432.504-.144.144-.296.304-.128.592.168.288.752 1.24 1.616 2.008.144.128.288.224.44.296.88.736 1.728.848 2.056.848.328 0 .544-.04.76-.288.216-.248.92-1.072 1.168-1.44.248-.368.5-.312.84-.192.336.12 2.136 1.008 2.504 1.192.368.184.608.272.688.416.08.144.08.84-.2 1.624z"/>
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        <!-- Link de pular -->
-        <div class="funil-pular">
-          <button type="button" class="funil-pular-link whatsapp-direto" onclick="funilPular()" lang="pt-BR">
-            Prefiro falar direto no WhatsApp
-          </button>
-        </div>
-      </div>
-    </div>
+    
 
     <script>
       // Configura ícones Lucide
@@ -5865,340 +4688,6 @@ tailwind.config = {
             });
         }
       });
-
-      // === FUNIL DE QUALIFICAÇÃO — Lógica completa ===
-
-      const WHATSAPP_NUMERO = "5531982003004"; // Andreia: (31) 98200-3004
-
-      // Estado do funil
-      const funilEstado = {
-        etapaAtual: 1,
-        servico: null,
-        experiencia: null,
-        nome: "",
-      };
-
-      // Mapeamento de serviços (id → label legível para resumo)
-      const FUNIL_SERVICOS_LABEL = {
-        1: "Sessão Tântrica Individual",
-        2: "Sessão Tântrica para Casais",
-        3: "Imersão Sensorial do Toque",
-        4: "Formação em Massagem Tântrica (Inicial)",
-        5: "Curso de Aplicação do Repertório Sexual",
-        6: "Treinamento Tântrico para Casais",
-        7: "Programa de Reconexão com o Prazer",
-      };
-
-      // Mapeamento de experiência (id → label legível para resumo)
-      const FUNIL_EXPERIENCIA_LABEL = {
-        nunca: "Nunca tive contato",
-        pouca: "Tive pouca experiência",
-        experiente: "Tenho experiência",
-      };
-
-      const FUNIL_MENSAGENS = {
-        1: (nome, exp) =>
-          `Olá Andreia! Sou ${nome}.
-
-Tenho interesse na *Sessão Tântrica Individual* e gostaria de me reconectar comigo mesma(o) e com o meu prazer.
-
-Sobre tantra: ${textoExperiencia(exp)}.
-
-Gostaria de saber mais sobre como funciona, valores e disponibilidade. 🌹`,
-        2: (nome, exp) =>
-          `Olá Andreia! Sou ${nome}.
-
-Tenho interesse na *Sessão Tântrica para Casais* — quero viver uma experiência de mais conexão e intimidade com meu(minha) parceiro(a).
-
-Sobre tantra: ${textoExperiencia(exp)}.
-
-Gostaria de saber mais sobre como funciona a sessão para casais, valores e como agendar. 🌹`,
-        3: (nome, exp) =>
-          `Olá Andreia! Sou ${nome}.
-
-Tenho interesse na *Imersão Sensorial do Toque* — quero aprender a conduzir experiências através do toque consciente.
-
-Sobre tantra: ${textoExperiencia(exp)}.
-
-Gostaria de saber mais sobre o conteúdo do mini curso, duração e valores. 🌹`,
-        4: (nome, exp) =>
-          `Olá Andreia! Sou ${nome}.
-
-Tenho interesse na *Formação em Massagem Tântrica — Nível Inicial*. Quero aprender a técnica do zero, com profundidade e segurança.
-
-Sobre tantra: ${textoExperiencia(exp)}.
-
-Gostaria de saber mais sobre a metodologia, duração, valores e como ingressar. 🌹`,
-        5: (nome, exp) =>
-          `Olá Andreia! Sou ${nome}.
-
-Tenho interesse no *Curso de Aplicação do Repertório Sexual*. Quero aprender a aplicar o repertório sexual de forma consciente, com presença e intenção.
-
-Sobre tantra: ${textoExperiencia(exp)}.
-
-Gostaria de saber mais sobre os pré-requisitos, conteúdo e valores. 🌹`,
-        6: (nome, exp) =>
-          `Olá Andreia! Sou ${nome}.
-
-Tenho interesse no *Treinamento Tântrico para Casais* — quero aprender, junto com meu(minha) parceiro(a), novas formas de criar conexão e prazer.
-
-Sobre tantra: ${textoExperiencia(exp)}.
-
-Gostaria de saber mais sobre como funciona o treinamento, duração e valores. 🌹`,
-        7: (nome, exp) =>
-          `Olá Andreia! Sou ${nome}.
-
-Tenho interesse no *Programa de Reconexão com o Prazer (4 Sessões)* — quero trilhar um caminho guiado para conhecer e sentir meu corpo de verdade.
-
-Sobre tantra: ${textoExperiencia(exp)}.
-
-Gostaria de saber mais sobre o formato das sessões, valores e agendamento. 🌹`,
-      };
-
-      // Mensagem genérica para quem pula direto pro WhatsApp
-      const FUNIL_MENSAGEM_GENERICA = `Olá Andreia! Vim do site e gostaria de saber mais sobre os seus serviços. 🌹`;
-
-      function textoExperiencia(exp) {
-        if (exp === "nunca") return "nunca tive contato — tudo é novo pra mim";
-        if (exp === "pouca")
-          return "tive pouca experiência — já tive algum contato";
-        if (exp === "experiente") return "tenho experiência e quero aprofundar";
-        return "gostaria de conversar mais a respeito";
-      }
-
-      // === ABRIR / FECHAR FUNIL ===
-
-      function abrirFunil(servicoPreSelecionado = null) {
-        const overlay = document.getElementById("modal-funil-qualificacao");
-        if (!overlay) return;
-
-        // Cancelar qualquer timeout anterior de avanço automático
-        if (funilEstado.autoAdvanceTimeout) {
-          clearTimeout(funilEstado.autoAdvanceTimeout);
-          funilEstado.autoAdvanceTimeout = null;
-        }
-
-        // Resetar estado
-        funilEstado.etapaAtual = 1;
-        funilEstado.servico = null;
-        funilEstado.experiencia = null;
-        funilEstado.nome = "";
-
-        // Limpar seleções visuais
-        document
-          .querySelectorAll(".funil-option, .funil-option-compact")
-          .forEach((el) => el.classList.remove("is-selected"));
-        const inputNome = document.getElementById("funil-nome");
-        if (inputNome) inputNome.value = "";
-
-        // Mostrar etapa 1
-        funilMostrarEtapa(1);
-
-        // Pré-selecionar serviço se vier de um card específico
-        if (servicoPreSelecionado) {
-          const optionBtn = document.querySelector(
-            `.funil-option-compact[data-servico="${servicoPreSelecionado}"]`,
-          );
-          if (optionBtn) {
-            optionBtn.click();
-          }
-        }
-
-        // Abrir overlay
-        overlay.classList.add("is-open");
-        document.body.style.overflow = "hidden";
-
-        // Renderizar ícones lucide novos
-        if (typeof lucide !== "undefined") lucide.createIcons();
-      }
-
-      function fecharFunil() {
-        const overlay = document.getElementById("modal-funil-qualificacao");
-        if (!overlay) return;
-
-        // Cancelar qualquer timeout anterior de avanço automático
-        if (funilEstado.autoAdvanceTimeout) {
-          clearTimeout(funilEstado.autoAdvanceTimeout);
-          funilEstado.autoAdvanceTimeout = null;
-        }
-
-        overlay.classList.remove("is-open");
-        document.body.style.overflow = "";
-      }
-
-      // Fechar ao clicar no overlay (fora do container)
-      document
-        .getElementById("modal-funil-qualificacao")
-        ?.addEventListener("click", (e) => {
-          if (e.target.id === "modal-funil-qualificacao") fecharFunil();
-        });
-
-      // Fechar com ESC (already inside another keydown, I will add it there, wait no, I can add another keydown)
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          const overlay = document.getElementById("modal-funil-qualificacao");
-          if (overlay && overlay.classList.contains("is-open")) fecharFunil();
-        }
-      });
-
-      // === CONTROLE DE ETAPAS ===
-
-      function funilMostrarEtapa(numero) {
-        funilEstado.etapaAtual = numero;
-
-        // Expandir container apenas na etapa 1 (pra acomodar o grid 3×2)
-        const container = document.querySelector(".funil-container");
-        if (container) {
-          container.classList.toggle("is-step-1", numero === 1);
-        }
-
-        // Mostrar a etapa correta
-        document.querySelectorAll(".funil-step").forEach((el) => {
-          el.classList.toggle(
-            "is-active",
-            parseInt(el.dataset.step) === numero,
-          );
-        });
-
-        // Atualizar barra de progresso
-        const fill = document.getElementById("funil-progress-fill");
-        const text = document.getElementById("funil-progress-text");
-        if (fill) fill.style.width = `${(numero / 3) * 100}%`;
-        if (text) text.textContent = `Etapa ${numero} de 3`;
-
-        // Atualizar resumo se for etapa 3
-        if (numero === 3) {
-          document.getElementById("funil-resumo-servico").textContent =
-            FUNIL_SERVICOS_LABEL[funilEstado.servico] || "—";
-          document.getElementById("funil-resumo-experiencia").textContent =
-            FUNIL_EXPERIENCIA_LABEL[funilEstado.experiencia] || "—";
-
-          // Focar input do nome
-          setTimeout(() => {
-            const input = document.getElementById("funil-nome");
-            if (input) input.focus();
-          }, 300);
-        }
-      }
-
-      function funilAvancar() {
-        if (funilEstado.etapaAtual === 1 && !funilEstado.servico) return;
-        if (funilEstado.etapaAtual === 2 && !funilEstado.experiencia) return;
-        if (funilEstado.etapaAtual < 3) {
-          funilMostrarEtapa(funilEstado.etapaAtual + 1);
-        }
-      }
-
-      function funilVoltar() {
-        // Cancelar qualquer timeout anterior de avanço automático
-        if (funilEstado.autoAdvanceTimeout) {
-          clearTimeout(funilEstado.autoAdvanceTimeout);
-          funilEstado.autoAdvanceTimeout = null;
-        }
-
-        if (funilEstado.etapaAtual > 1) {
-          funilMostrarEtapa(funilEstado.etapaAtual - 1);
-        }
-      }
-
-      // === SELEÇÃO DE OPÇÕES ===
-
-      document.addEventListener("click", (e) => {
-        const optionEl = e.target.closest(".funil-option");
-        if (!optionEl) return;
-
-        const stepEl = optionEl.closest(".funil-step");
-        // Limpar seleções da etapa atual
-        stepEl
-          .querySelectorAll(".funil-option")
-          .forEach((el) => el.classList.remove("is-selected"));
-        optionEl.classList.add("is-selected");
-
-        // Cancelar qualquer timeout anterior de avanço automático
-        if (funilEstado.autoAdvanceTimeout) {
-          clearTimeout(funilEstado.autoAdvanceTimeout);
-          funilEstado.autoAdvanceTimeout = null;
-        }
-
-        // Guardar valor no estado e agendar avanço automático
-        if (optionEl.dataset.servico) {
-          funilEstado.servico = optionEl.dataset.servico;
-          const btn = document.getElementById("funil-avancar-1");
-          if (btn) btn.disabled = false;
-
-          funilEstado.autoAdvanceTimeout = setTimeout(() => {
-            funilAvancar();
-          }, 350);
-        }
-        if (optionEl.dataset.experiencia) {
-          funilEstado.experiencia = optionEl.dataset.experiencia;
-          const btn = document.getElementById("funil-avancar-2");
-          if (btn) btn.disabled = false;
-
-          funilEstado.autoAdvanceTimeout = setTimeout(() => {
-            funilAvancar();
-          }, 350);
-        }
-      });
-
-      // Validação do input de nome (etapa 3)
-      document.getElementById("funil-nome")?.addEventListener("input", (e) => {
-        const nome = e.target.value.trim();
-        funilEstado.nome = nome;
-        document.getElementById("funil-avancar-3").disabled = nome.length < 2;
-      });
-
-      // Permitir Enter no input pra finalizar
-      document
-        .getElementById("funil-nome")
-        ?.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" && funilEstado.nome.length >= 2) {
-            e.preventDefault();
-            funilFinalizar();
-          }
-        });
-
-      // === FINALIZAR (MONTAR LINK E ABRIR WHATSAPP) ===
-
-      function funilFinalizar() {
-        if (
-          !funilEstado.servico ||
-          !funilEstado.experiencia ||
-          funilEstado.nome.length < 2
-        )
-          return;
-
-        const nomeCapitalizado = funilEstado.nome
-          .split(" ")
-          .map((p) => p.charAt(0).toUpperCase() + p.slice(1).toLowerCase())
-          .join(" ");
-
-        // Dispara evento para o GTM / Google Tag Manager via dataLayer
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: "quiz_lead_completo",
-          quiz_nome: nomeCapitalizado,
-          quiz_servico: FUNIL_SERVICOS_LABEL[funilEstado.servico] || "",
-          quiz_experiencia: FUNIL_EXPERIENCIA_LABEL[funilEstado.experiencia] || "",
-          quiz_origem: "tantra_quiz_3etapas"
-        });
-
-        const mensagemFn = FUNIL_MENSAGENS[funilEstado.servico];
-        const mensagem = mensagemFn(nomeCapitalizado, funilEstado.experiencia);
-
-        const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(mensagem)}`;
-        window.location.href = url;
-
-        fecharFunil();
-      }
-
-      // === PULAR DIRETO PRO WHATSAPP ===
-
-      function funilPular() {
-        const url = `https://wa.me/${WHATSAPP_NUMERO}?text=${encodeURIComponent(FUNIL_MENSAGEM_GENERICA)}`;
-        window.location.href = url;
-        fecharFunil();
-      }
 
       // === CARROSSEL ELEGANTE — Seção "Como funciona o atendimento" ===
 
