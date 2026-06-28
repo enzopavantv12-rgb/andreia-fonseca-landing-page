@@ -2051,6 +2051,39 @@
         background: rgba(184, 69, 110, 0.12);
       }
     </style>
+    <script>
+      // Fallback dinâmico para visualização local (protocolo file://)
+      if (window.location.protocol === 'file:') {
+        const cdnScript = document.createElement('script');
+        cdnScript.src = "https://cdn.tailwindcss.com";
+        document.head.appendChild(cdnScript);
+
+        const configScript = document.createElement('script');
+        configScript.textContent = `
+          tailwind.config = {
+            theme: {
+              extend: {
+                colors: {
+                  onyx: "#1F0F1A",
+                  champagne: "#F2E5DA",
+                  magenta: "#B8456E",
+                  berinjela: "#6A2B43",
+                  bordo: "#441829",
+                  marfim: "#FDFBF7",
+                  "cinza-violeta": "#A89BA1",
+                  mauve: "#8B7380",
+                },
+                fontFamily: {
+                  sans: ["DM Sans", "sans-serif"],
+                  serif: ["Playfair Display", "serif"],
+                },
+              }
+            }
+          };
+        `;
+        document.head.appendChild(configScript);
+      }
+    </script>
   <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
   <script type="module" src="/src/main.tsx"></script>
   </head>
