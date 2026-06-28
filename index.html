@@ -53,13 +53,19 @@
     <!-- === PRECONNECT E DNS-PREFETCH === -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://cdn.tailwindcss.com" />
+    <link rel="preconnect" href="https://i.postimg.cc" crossorigin />
     <link rel="dns-prefetch" href="https://unpkg.com" />
     <link rel="dns-prefetch" href="https://images.unsplash.com" />
-    <link rel="dns-prefetch" href="https://i.postimg.cc" />
 
-    <!-- === GOOGLE FONTS === -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    <!-- === PRELOAD DO LCP RESPONSIVO === -->
+    <link rel="preload" as="image" fetchpriority="high" href="https://i.postimg.cc/xTPQcsV0/DSCF1616.jpg" media="(max-width: 767px)" />
+    <link rel="preload" as="image" fetchpriority="high" href="https://i.postimg.cc/4yGMV07N/Chat-GPT-Image-10-de-mai-de-2026-21-38-08.png" media="(min-width: 768px)" />
+
+    <!-- === GOOGLE FONTS (ASSÍNCRONO) === -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+    </noscript>
 
     <!-- === JSON-LD Schema.org === -->
     <script type="application/ld+json">
@@ -102,10 +108,25 @@
       }
       body {
         background-color: #1f0f1a;
-        font-family: "DM Sans", sans-serif;
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
       }
       img {
         filter: brightness(85%) contrast(105%) saturate(95%);
+      }
+
+      /* === SUPPORT FOR PREFERS REDUCED MOTION === */
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto !important;
+        }
+        [data-animate] {
+          opacity: 1 !important;
+          transform: none !important;
+        }
+        .animate-fade-up, .pulse-soft, .shiny-cta::after, .cursor-dot, .cursor-ring {
+          animation: none !important;
+          transition: none !important;
+        }
       }
 
       @keyframes fade-up {
@@ -2030,30 +2051,8 @@
         background: rgba(184, 69, 110, 0.12);
       }
     </style>
-  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        onyx: "#1F0F1A",
-        champagne: "#F2E5DA",
-        magenta: "#B8456E",
-        berinjela: "#6A2B43",
-        bordo: "#441829",
-        marfim: "#FDFBF7",
-        "cinza-violeta": "#A89BA1",
-        mauve: "#8B7380",
-      },
-      fontFamily: {
-        sans: ["DM Sans", "sans-serif"],
-        serif: ["Playfair Display", "serif"],
-      },
-    }
-  }
-}
-</script>
+  <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+  <script type="module" src="/src/main.tsx"></script>
   </head>
   <body class="text-marfim antialiased overflow-x-hidden">
     <nav
@@ -2181,8 +2180,10 @@ tailwind.config = {
           <div
             class="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,_rgba(184,69,110,0.15)_0%,_transparent_40%)] z-10 w-full h-full"
           ></div>
-          <img width="1279" height="720" decoding="async" loading="eager" src="https://i.postimg.cc/4yGMV07N/Chat-GPT-Image-10-de-mai-de-2026-21-38-08.png" alt="Ambiente acolhedor de atendimento tântrico em Belo Horizonte" class="hero-bg-img hidden md:block absolute inset-0 w-full h-full object-cover" lang="pt-BR" />
-          <img width="533" height="800" decoding="async" loading="eager" src="https://i.postimg.cc/xTPQcsV0/DSCF1616.jpg" alt="Ambiente acolhedor de atendimento tântrico em Belo Horizonte" class="hero-bg-img block md:hidden absolute inset-0 w-full h-full object-cover" lang="pt-BR" />
+          <picture class="absolute inset-0 w-full h-full z-0">
+            <source media="(min-width: 768px)" srcset="https://i.postimg.cc/4yGMV07N/Chat-GPT-Image-10-de-mai-de-2026-21-38-08.png" width="1279" height="720">
+            <img width="533" height="800" fetchpriority="high" decoding="async" src="https://i.postimg.cc/xTPQcsV0/DSCF1616.jpg" alt="Ambiente acolhedor de atendimento tântrico em Belo Horizonte" class="hero-bg-img absolute inset-0 w-full h-full object-cover" lang="pt-BR" />
+          </picture>
         </div>
 
         <div
@@ -4381,9 +4382,6 @@ tailwind.config = {
     
 
     <script>
-      // Configura ícones Lucide
-      lucide.createIcons();
-
       // === FLIP GALLERY — Galeria com efeito de painel de aeroporto ===
 
       const flipImages = [
@@ -4502,7 +4500,8 @@ tailwind.config = {
       }
 
       // Inicializar a galeria + autoplay quando entrar no viewport (via IntersectionObserver)
-      if (flipGalleryEl) {
+      function flipGalleryInit() {
+        if (!flipGalleryEl) return;
         initFlipGallery();
 
         const flipObserver = new IntersectionObserver(
@@ -4519,11 +4518,6 @@ tailwind.config = {
         );
 
         flipObserver.observe(flipGalleryEl);
-      }
-
-      // Re-renderizar ícones Lucide (importante depois de injetar os botões)
-      if (typeof lucide !== "undefined") {
-        lucide.createIcons();
       }
 
       // Smooth scroll para âncoras
@@ -4963,17 +4957,9 @@ tailwind.config = {
         }
       }
 
-      // Inicializar quando o DOM estiver pronto
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", carouselInit);
-      } else {
-        carouselInit();
-      }
-
       // === CURSOR CUSTOMIZADO DUAL — Dot + Ring (otimizado GPU) ===
       // Só ativa em devices com mouse real (não em touch)
-
-      (function initDualCursor() {
+      function initDualCursor() {
         const supportsHover = window.matchMedia(
           "(hover: hover) and (pointer: fine)",
         ).matches;
@@ -5058,11 +5044,36 @@ tailwind.config = {
           dot.classList.remove("cursor-hidden");
           ring.classList.remove("cursor-hidden");
         });
-      })();
+      }
 
-      // Renderizar ícones lucide na inicialização final
-      if (typeof lucide !== "undefined") {
-        lucide.createIcons();
+      // === INICIALIZAÇÃO TARDIA (DEFERRED INIT) PARA ALTA PERFORMANCE ===
+      function initNonCriticalFeatures() {
+        // 1. Ícones Lucide
+        if (typeof lucide !== "undefined") {
+          lucide.createIcons();
+        }
+        
+        // 2. Galeria Flip
+        if (typeof flipGalleryInit === "function") {
+          flipGalleryInit();
+        }
+        
+        // 3. Carrossel
+        if (typeof carouselInit === "function") {
+          carouselInit();
+        }
+        
+        // 4. Cursor Customizado (Dual Cursor)
+        if (typeof initDualCursor === "function") {
+          initDualCursor();
+        }
+      }
+
+      const idleInit = window.requestIdleCallback || function(cb) { setTimeout(cb, 100); };
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => idleInit(initNonCriticalFeatures));
+      } else {
+        idleInit(initNonCriticalFeatures);
       }
     
       // === RASTREAMENTO GLOBAL DE CLIQUES DO WHATSAPP (GTM) ===
